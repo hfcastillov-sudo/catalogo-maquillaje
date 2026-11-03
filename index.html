@@ -3,119 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ss- Catálogo</title>
-    <!-- Cargamos Tailwind para los estilos visuales bonitos -->
-    <script src="https://tailwindcss.com"></script>
-</head>
-<body class="bg-pink-50 text-gray-800 font-sans mb-24">
-
-    <!-- Encabezado -->
-    <header class="bg-white shadow-sm p-4 sticky top-0 z-50 text-center">
-        <h1 class="text-2xl font-bold text-pink-600 tracking-wide">DIVA MAKEUP CALI</h1>
-        <p class="text-xs text-gray-500">Catálogo Virtual Interactivo</p>
+    <title>ss - Catálogo Profesional</title>
+    <style>
+        /* Estilos Base Garantizados para Todo Celular */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+        body { background-color: #fff1f2; color: #374151; padding-bottom: 100px; }
         
-        <!-- Buscador Visual (Informativo por ahora) -->
-        <div class="mt-3 max-w-md mx-auto px-2">
-            <input type="text" id="buscador" onkeyup="filtrarProductos()" placeholder="Buscar producto (ej. labial, base)..." 
-                   class="w-full px-4 py-2 rounded-full border border-pink-200 focus:outline-none focus:border-pink-500 text-sm shadow-inner">
+        /* Encabezado Estilo Boutique */
+        header { background: #ffffff; padding: 20px 15px; text-align: center; border-bottom: 2px solid #fbcfe8; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(219, 39, 119, 0.05); }
+        header h1 { color: #db2777; font-size: 24px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+        header p { color: #9ca3af; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+        
+        /* Buscador Estilizado */
+        .buscador-contenedor { max-width: 450px; margin: 15px auto 0 auto; padding: 0 10px; }
+        .buscador-contenedor input { width: 100%; padding: 12px 20px; border-radius: 50px; border: 1.5px solid #fbcfe8; font-size: 14px; outline: none; transition: all 0.3s ease; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+        .buscador-contenedor input:focus { border-color: #db2777; box-shadow: 0 0 8px rgba(219, 39, 119, 0.15); }
+        
+        /* Vitrina en Cuadrícula (Móvil: 2 columnas perfectas) */
+        main { max-width: 1100px; margin: 0 auto; padding: 15px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        @media (min-width: 768px) { main { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
+        
+        /* Tarjeta de Producto */
+        .tarjeta { background: #ffffff; border-radius: 16px; border: 1px solid #fce7f3; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; padding: 10px; box-shadow: 0 4px 6px rgba(219, 39, 119, 0.02); transition: transform 0.2s; }
+        .tarjeta:active { transform: scale(0.98); }
+        
+        /* Contenedor de Imagen Cuadrada */
+        .imagen-cuadro { width: 100%; aspect-ratio: 1 / 1; background-color: #fce7f3; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
+        .imagen-cuadro img { width: 100%; height: 100%; object-fit: cover; }
+        
+        /* Textos del Producto */
+        .info { padding: 4px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .titulo-prod { font-size: 13px; font-weight: 700; color: #1f2937; line-height: 1.3; min-height: 34px; margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .desc-prod { font-size: 11px; color: #6b7280; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        
+        /* Precio y Botón de Compra */
+        .precio { color: #db2777; font-size: 16px; font-weight: 800; margin-bottom: 8px; }
+        .btn-agregar { width: 100%; background: #db2777; color: white; border: none; padding: 10px 0; border-radius: 10px; font-size: 12px; font-weight: 700; cursor: pointer; transition: background 0.2s; text-transform: uppercase; letter-spacing: 0.5px; }
+        .btn-agregar:hover { background: #be185d; }
+        
+        /* Carrito de Compras Flotante */
+        .carrito-barra { display: none; position: fixed; bottom: 15px; left: 15px; right: 15px; max-width: 450px; margin: 0 auto; background: rgba(255, 255, 255, 0.96); border: 1px solid #fbcfe8; backdrop-filter: blur(10px); padding: 14px 20px; border-radius: 20px; box-shadow: 0 10px 25px rgba(219, 39, 119, 0.15); z-index: 999; align-items: center; justify-content: space-between; animation: slideUp 0.3s ease; }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .carrito-datos .items-conteo { font-size: 11px; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.5px; }
+        .carrito-datos .precio-total { font-size: 18px; font-weight: 900; color: #db2777; }
+        .btn-whatsapp { background: #22c55e; color: white; border: none; padding: 12px 20px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2); }
+        .btn-whatsapp:hover { background: #16a34a; }
+    </style>
+</head>
+<body>
+
+    <!-- Encabezado con buscador incorporado -->
+    <header>
+        <h1>Diva Makeup Cali</h1>
+        <p>Catálogo Virtual Interactivo</p>
+        <div class="buscador-contenedor">
+            <input type="text" id="buscador" onkeyup="filtrarProductos()" placeholder="Buscar producto (ej. labial, base)...">
         </div>
     </header>
 
-    <!-- Contenedor Principal / Vitrina (Escritos directamente en HTML) -->
-    <main class="max-w-6xl mx-auto p-4 grid grid-cols-2 md:grid-cols-4 gap-4" id="lista-productos">
+    <!-- Vitrina de Productos -->
+    <main id="lista-productos">
         
         <!-- Producto 1 -->
-        <div class="tarjeta-producto bg-white rounded-xl shadow-sm overflow-hidden border border-pink-100 flex flex-col justify-between p-2" data-nombre="labial matte larga duracion">
-            <div>
-                <div class="w-full h-36 bg-pink-100 rounded-lg flex items-center justify-center overflow-hidden">
-                    <img src="https://picsum.photos" alt="Labial" class="w-full h-full object-cover">
-                </div>
-                <div class="mt-2">
-                    <h3 class="font-bold text-xs text-gray-900 leading-tight min-h-[32px]">Labial Matte Larga Duración</h3>
-                    <p class="text-[11px] text-gray-500 mt-1 line-clamp-2">Tono rojo intenso, no transfiere e hidrata tus labios.</p>
-                </div>
+        <div class="tarjeta" data-nombre="labial matte larga duracion">
+            <div class="imagen-cuadro">
+                <img src="https://picsum.photos/id/292/400/400" alt="Labial">
             </div>
-            <div class="mt-3">
-                <div class="text-pink-600 font-extrabold text-sm mb-2">$15.000</div>
-                <button onclick="agregar(1, 'Labial Matte', 15000)" class="w-full bg-pink-500 hover:bg-pink-600 text-white text-[11px] font-bold py-2 rounded-lg transition shadow-sm active:scale-95">
-                    Añadir al carrito
-                </button>
+            <div class="info">
+                <h3 class="titulo-prod">Labial Matte Larga Duración</h3>
+                <p class="desc-prod">Tono rojo intenso, no transfiere e hidrata tus labios durante todo el día.</p>
+                <div>
+                    <div class="precio">$15.000</div>
+                    <button class="btn-agregar" onclick="agregar(1, 'Labial Matte', 15000)">Añadir</button>
+                </div>
             </div>
         </div>
 
         <!-- Producto 2 -->
-        <div class="tarjeta-producto bg-white rounded-xl shadow-sm overflow-hidden border border-pink-100 flex flex-col justify-between p-2" data-nombre="base de maquillaje alta cobertura">
-            <div>
-                <div class="w-full h-36 bg-pink-100 rounded-lg flex items-center justify-center overflow-hidden">
-                    <img src="https://picsum.photos" alt="Base" class="w-full h-full object-cover">
-                </div>
-                <div class="mt-2">
-                    <h3 class="font-bold text-xs text-gray-900 leading-tight min-h-[32px]">Base de Maquillaje Alta Cobertura</h3>
-                    <p class="text-[11px] text-gray-500 mt-1 line-clamp-2">Efecto porcelana, control de brillo y acabado mate.</p>
-                </div>
+        <div class="tarjeta" data-nombre="base de maquillaje alta cobertura">
+            <div class="imagen-cuadro">
+                <img src="https://picsum.photos/id/1025/400/400" alt="Base">
             </div>
-            <div class="mt-3">
-                <div class="text-pink-600 font-extrabold text-sm mb-2">$32.000</div>
-                <button onclick="agregar(2, 'Base Cobertura', 32000)" class="w-full bg-pink-500 hover:bg-pink-600 text-white text-[11px] font-bold py-2 rounded-lg transition shadow-sm active:scale-95">
-                    Añadir al carrito
-                </button>
+            <div class="info">
+                <h3 class="titulo-prod">Base de Maquillaje Alta Cobertura</h3>
+                <p class="desc-prod">Efecto porcelana, excelente control de brillo y acabado mate sedoso.</p>
+                <div>
+                    <div class="precio">$32.000</div>
+                    <button class="btn-agregar" onclick="agregar(2, 'Base Cobertura', 32000)">Añadir</button>
+                </div>
             </div>
         </div>
 
         <!-- Producto 3 -->
-        <div class="tarjeta-producto bg-white rounded-xl shadow-sm overflow-hidden border border-pink-100 flex flex-col justify-between p-2" data-nombre="kit de brochas profesionales x12">
-            <div>
-                <div class="w-full h-36 bg-pink-100 rounded-lg flex items-center justify-center overflow-hidden">
-                    <img src="https://picsum.photos" alt="Brochas" class="w-full h-full object-cover">
-                </div>
-                <div class="mt-2">
-                    <h3 class="font-bold text-xs text-gray-900 leading-tight min-h-[32px]">Kit de Brochas Profesionales x12</h3>
-                    <p class="text-[11px] text-gray-500 mt-1 line-clamp-2">Pelo sintético ultra suave para difuminar perfectamente.</p>
-                </div>
+        <div class="tarjeta" data-nombre="kit de brochas profesionales x12">
+            <div class="imagen-cuadro">
+                <img src="https://picsum.photos/id/64/400/400" alt="Brochas">
             </div>
-            <div class="mt-3">
-                <div class="text-pink-600 font-extrabold text-sm mb-2">$45.000</div>
-                <button onclick="agregar(3, 'Kit Brochas x12', 45000)" class="w-full bg-pink-500 hover:bg-pink-600 text-white text-[11px] font-bold py-2 rounded-lg transition shadow-sm active:scale-95">
-                    Añadir al carrito
-                </button>
+            <div class="info">
+                <h3 class="titulo-prod">Kit de Brochas Profesionales x12</h3>
+                <p class="desc-prod">Pelo sintético ultra suave premium para difuminar perfectamente polvos y cremas.</p>
+                <div>
+                    <div class="precio">$45.000</div>
+                    <button class="btn-agregar" onclick="agregar(3, 'Kit Brochas x12', 45000)">Añadir</button>
+                </div>
             </div>
         </div>
 
         <!-- Producto 4 -->
-        <div class="tarjeta-producto bg-white rounded-xl shadow-sm overflow-hidden border border-pink-100 flex flex-col justify-between p-2" data-nombre="paleta de sombras shimmer">
-            <div>
-                <div class="w-full h-36 bg-pink-100 rounded-lg flex items-center justify-center overflow-hidden">
-                    <img src="https://picsum.photos" alt="Sombras" class="w-full h-full object-cover">
-                </div>
-                <div class="mt-2">
-                    <h3 class="font-bold text-xs text-gray-900 leading-tight min-h-[32px]">Paleta de Sombras Shimmer</h3>
-                    <p class="text-[11px] text-gray-500 mt-1 line-clamp-2">Tonos ultra pigmentados entre mates y satinados.</p>
-                </div>
+        <div class="tarjeta" data-nombre="paleta de sombras shimmer">
+            <div class="imagen-cuadro">
+                <img src="https://picsum.photos/id/30/400/400" alt="Sombras">
             </div>
-            <div class="mt-3">
-                <div class="text-pink-600 font-extrabold text-sm mb-2">$28.000</div>
-                <button onclick="agregar(4, 'Paleta Sombras', 28000)" class="w-full bg-pink-500 hover:bg-pink-600 text-white text-[11px] font-bold py-2 rounded-lg transition shadow-sm active:scale-95">
-                    Añadir al carrito
-                </button>
+            <div class="info">
+                <h3 class="titulo-prod">Paleta de Sombras Shimmer</h3>
+                <p class="desc-prod">Tonos ultra pigmentados de alta fijación entre acabados mates y satinados de tendencia.</p>
+                <div>
+                    <div class="precio">$28.000</div>
+                    <button class="btn-agregar" onclick="agregar(4, 'Paleta Sombras', 28000)">Añadir</button>
+                </div>
             </div>
         </div>
 
     </main>
 
-    <!-- Barra del Carrito Flotante (Controlada por JavaScript básico) -->
-    <div id="barra-carrito" class="hidden fixed bottom-0 inset-x-0 bg-white border-t border-pink-100 p-4 shadow-2xl z-50 flex justify-between items-center max-w-md mx-auto rounded-t-2xl">
-        <div>
-            <span id="cant-items" class="text-xs font-bold text-gray-500 uppercase tracking-wider">0 artículos</span>
-            <div id="total-precio" class="text-pink-600 font-black text-xl">Total: $0</div>
+    <!-- Barra del Carrito Flotante Inteligente -->
+    <div id="barra-carrito" class="carrito-barra">
+        <div class="carrito-datos">
+            <div id="cant-items" class="items-conteo">0 artículos</div>
+            <div id="total-precio" class="precio-total">Total: $0</div>
         </div>
-        <button onclick="enviarWhatsApp()" class="bg-green-500 hover:bg-green-600 text-white font-bold px-5 py-2.5 rounded-xl text-xs flex items-center gap-2 shadow-md uppercase tracking-wide">
+        <button class="btn-whatsapp" onclick="enviarWhatsApp()">
             Pedir por WhatsApp
         </button>
     </div>
 
     <script>
-        // Configuración básica
-        const numeroWhatsApp = "573156021790"; // <-- Tu número
+        // Configuración y Control del Carrito
+        const numeroWhatsApp = "573156021790"; // <-- Reemplaza con tu WhatsApp real
         let carrito = [];
 
         function agregar(id, nombre, precio) {
@@ -134,14 +158,14 @@
             const totalPrecio = document.getElementById('total-precio');
             
             if (carrito.length > 0) {
-                barra.classList.remove('hidden');
+                barra.style.display = "flex";
                 let totalArticulos = carrito.reduce((sum, item) => sum + item.cantidad, 0);
                 let dineroTotal = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
                 
                 cantItems.innerText = `${totalArticulos} artículos`;
                 totalPrecio.innerText = `Total: $${dineroTotal.toLocaleString('es-CO')}`;
             } else {
-                barra.classList.add('hidden');
+                barra.style.display = "none";
             }
         }
 
@@ -154,13 +178,13 @@
                 total += subtotal;
             });
             texto += `\n*Total a pagar: $${total.toLocaleString('es-CO')}*`;
-            let url = `https://whatsapp.com{numeroWhatsApp}&text=${encodeURIComponent(texto)}`;
+            let url = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${encodeURIComponent(texto)}`;
             window.open(url, '_blank');
         }
 
         function filtrarProductos() {
             let busqueda = document.getElementById('buscador').value.toLowerCase();
-            let tarjetas = document.getElementsByClassName('tarjeta-producto');
+            let tarjetas = document.getElementsByClassName('tarjeta');
             
             for (let i = 0; i < tarjetas.length; i++) {
                 let nombreProd = tarjetas[i].getAttribute('data-nombre');
