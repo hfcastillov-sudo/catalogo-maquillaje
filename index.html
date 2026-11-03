@@ -27,7 +27,7 @@
             <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-pink-100 flex flex-col justify-between p-2">
                 <div>
                     <div class="w-full h-36 bg-pink-100 rounded-lg flex items-center justify-center overflow-hidden">
-                        <img :src="producto.imagen" :alt="producto.nombre" class="w-full h-full object-cover" onerror="this.src='https://placehold.co'">
+                        <img :src="producto.imagen" :alt="producto.nombre" class="w-full h-full object-cover">
                     </div>
                     <div class="mt-2">
                         <h3 class="font-bold text-xs text-gray-900 leading-tight min-h-[32px]" x-text="producto.nombre"></h3>
@@ -61,15 +61,16 @@
         function catalogo() {
             return {
                 buscar: '',
-                numeroWhatsApp: '573156021790', // <-- REEMPLAZAR CON TU WHATSAPP REAL (Usa el código del país sin el signo +)
+                numeroWhatsApp: '573206358608', // <-- REEMPLAZAR CON TU WHATSAPP (Solo números)
                 carrito: [],
                 productos: [
-                    { id: 1, nombre: "Labial Matte Larga Duración", precio: 15000, descripcion: "Tono rojo intenso, no transfiere e hidrata tus labios.", imagen: "https://unsplash.com" },
-                    { id: 2, nombre: "Base de Maquillaje Alta Cobertura", precio: 32000, descripcion: "Efecto porcelana, control de brillo y acabado mate.", imagen: "https://unsplash.com" },
-                    { id: 3, nombre: "Kit de Brochas Profesionales x12", precio: 45000, descripcion: "Pelo sintético ultra suave para difuminar perfectamente.", imagen: "https://unsplash.com" },
-                    { id: 4, nombre: "Paleta de Sombras Shimmer", precio: 28000, descripcion: "Tonos ultra pigmentados entre mates y satinados.", imagen: "https://unsplash.com" }
+                    { id: 1, nombre: "Labial Matte Larga Duración", precio: 15000, descripcion: "Tono rojo intenso, no transfiere e hidrata tus labios.", imagen: "https://picsum.photos" },
+                    { id: 2, nombre: "Base de Maquillaje Alta Cobertura", precio: 32000, descripcion: "Efecto porcelana, control de brillo y acabado mate.", imagen: "https://picsum.photos" },
+                    { id: 3, nombre: "Kit de Brochas Profesionales x12", precio: 45000, descripcion: "Pelo sintético ultra suave para difuminar perfectamente.", imagen: "https://picsum.photos" },
+                    { id: 4, nombre: "Paleta de Sombras Shimmer", precio: 28000, descripcion: "Tonos ultra pigmentados entre mates y satinados.", imagen: "https://picsum.photos" }
                 ],
                 productosFiltrados() {
+                    if (this.buscar.trim() === '') return this.productos;
                     return this.productos.filter(p => p.nombre.toLowerCase().includes(this.buscar.toLowerCase()));
                 },
                 agregarAlCarrito(producto) {
