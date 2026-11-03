@@ -5,79 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diva Makeup Cali - Catálogo Profesional</title>
     <style>
-        /* Estilos Base Garantizados para Todo Celular */
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
-        body { background-color: #fff1f2; color: #374151; padding-bottom: 100px; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Arial, sans-serif; }
+        body { background-color: #fff1f2; color: #374151; padding-bottom: 120px; }
         
-        /* Encabezado Estilo Boutique */
         header { background: #ffffff; padding: 20px 15px; text-align: center; border-bottom: 2px solid #fbcfe8; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(219, 39, 119, 0.05); }
         header h1 { color: #db2777; font-size: 24px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
         header p { color: #9ca3af; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
         
-        /* Buscador Estilizado */
         .buscador-contenedor { max-width: 450px; margin: 15px auto 0 auto; padding: 0 10px; }
-        .buscador-contenedor input { width: 100%; padding: 12px 20px; border-radius: 50px; border: 1.5px solid #fbcfe8; font-size: 14px; outline: none; transition: all 0.3s ease; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
-        .buscador-contenedor input:focus { border-color: #db2777; box-shadow: 0 0 8px rgba(219, 39, 119, 0.15); }
+        .buscador-contenedor input { width: 100%; padding: 12px 20px; border-radius: 50px; border: 1.5px solid #fbcfe8; font-size: 14px; outline: none; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+        .buscador-contenedor input:focus { border-color: #db2777; }
         
-        /* Vitrina en Cuadrícula (Móvil: 2 columnas perfectas) */
         main { max-width: 1100px; margin: 0 auto; padding: 15px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
         @media (min-width: 768px) { main { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
         
-        /* Tarjeta de Producto */
-        .tarjeta { background: #ffffff; border-radius: 16px; border: 1px solid #fce7f3; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; padding: 10px; box-shadow: 0 4px 6px rgba(219, 39, 119, 0.02); transition: transform 0.2s; }
-        .tarjeta:active { transform: scale(0.98); }
+        .tarjeta { background: #ffffff; border-radius: 16px; border: 1px solid #fce7f3; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; padding: 10px; box-shadow: 0 4px 6px rgba(219, 39, 119, 0.02); }
         
-        /* Contenedor de Imagen Cuadrada */
         .imagen-cuadro { width: 100%; aspect-ratio: 1 / 1; background-color: #fce7f3; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
         .imagen-cuadro img { width: 100%; height: 100%; object-fit: cover; }
         
-        /* Textos del Producto */
         .info { padding: 4px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .titulo-prod { font-size: 13px; font-weight: 700; color: #1f2937; line-height: 1.3; min-height: 34px; margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .desc-prod { font-size: 11px; color: #6b7280; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .titulo-prod { font-size: 13px; font-weight: 700; color: #1f2937; line-height: 1.3; min-height: 34px; margin-bottom: 4px; }
+        .desc-prod { font-size: 11px; color: #6b7280; line-height: 1.4; margin-bottom: 10px; }
         
-        /* Precio y Botón de Compra */
         .precio { color: #db2777; font-size: 16px; font-weight: 800; margin-bottom: 8px; }
-        .btn-agregar { width: 100%; background: #db2777; color: white; border: none; padding: 10px 0; border-radius: 10px; font-size: 12px; font-weight: 700; cursor: pointer; transition: background 0.2s; text-transform: uppercase; letter-spacing: 0.5px; }
+        .btn-agregar { width: 100%; background: #db2777; color: white; border: none; padding: 10px 0; border-radius: 10px; font-size: 12px; font-weight: 700; cursor: pointer; text-transform: uppercase; }
         .btn-agregar:hover { background: #be185d; }
         
-        /* Carrito de Compras Flotante */
-        .carrito-barra { display: none; position: fixed; bottom: 15px; left: 15px; right: 15px; max-width: 450px; margin: 0 auto; background: rgba(255, 255, 255, 0.96); border: 1px solid #fbcfe8; backdrop-filter: blur(10px); padding: 14px 20px; border-radius: 20px; box-shadow: 0 10px 25px rgba(219, 39, 119, 0.15); z-index: 999; align-items: center; justify-content: space-between; animation: slideUp 0.3s ease; }
-        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .carrito-datos .items-conteo { font-size: 11px; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.5px; }
+        /* Barra flotante inferior */
+        .carrito-barra { display: none; position: fixed; bottom: 15px; left: 15px; right: 15px; max-width: 450px; margin: 0 auto; background: #ffffff; border: 2px solid #db2777; padding: 14px 20px; border-radius: 20px; box-shadow: 0 10px 25px rgba(219, 39, 119, 0.15); z-index: 999; align-items: center; justify-content: space-between; }
+        .carrito-datos .items-conteo { font-size: 11px; font-weight: 700; color: #9ca3af; text-transform: uppercase; }
         .carrito-datos .precio-total { font-size: 18px; font-weight: 900; color: #db2777; }
         
-        .btn-ver-carrito { background: #db2777; color: white; border: none; padding: 10px 15px; border-radius: 10px; font-size: 12px; font-weight: 700; cursor: pointer; text-transform: uppercase; margin-right: 5px; }
-        .btn-ver-carrito:hover { background: #be185d; }
+        .botones-barra { display: flex; gap: 8px; }
+        .btn-ver-carrito { background: #db2777; color: white; border: none; padding: 12px 14px; border-radius: 12px; font-size: 12px; font-weight: 700; cursor: pointer; text-transform: uppercase; }
+        .btn-whatsapp { background: #22c55e; color: white; border: none; padding: 12px 14px; border-radius: 12px; font-size: 12px; font-weight: 700; cursor: pointer; text-transform: uppercase; }
         
-        /* Ventana Emergente Modal del Detalle */
-        .modal-fondo { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(4px); z-index: 2000; align-items: center; justify-content: center; padding: 15px; }
-        .modal-contenido { background: white; border-radius: 24px; width: 100%; max-width: 450px; max-height: 80vh; overflow-y: auto; padding: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); display: flex; flex-direction: column; }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #f3f4f6; padding-bottom: 10px; }
-        .modal-header h2 { font-size: 18px; color: #1f2937; font-weight: 800; }
-        .btn-cerrar { background: none; border: none; font-size: 24px; color: #9ca3af; cursor: pointer; line-height: 1; }
+        /* Modal del Carrito Emergente */
+        .modal-carrito { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 15px; }
+        .modal-contenido { background: white; width: 100%; max-width: 450px; border-radius: 24px; padding: 20px; max-height: 80vh; display: flex; flex-direction: column; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #fbcfe8; padding-bottom: 10px; margin-bottom: 15px; }
+        .modal-header h2 { font-size: 18px; color: #db2777; font-weight: 800; }
+        .btn-cerrar { background: none; border: none; font-size: 24px; color: #9ca3af; cursor: pointer; font-weight: bold; }
         
-        /* Items dentro del Carrito */
-        .carrito-lista-items { flex-grow: 1; margin-bottom: 15px; }
-        .item-carrito { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f9fafb; }
-        .item-detalles { flex-grow: 1; padding-right: 10px; }
-        .item-nombre { font-size: 13px; font-weight: 700; color: #374151; }
-        .item-precio-sub { font-size: 12px; color: #db2777; font-weight: 600; margin-top: 2px; }
+        .modal-lista { flex-grow: 1; overflow-y: auto; margin-bottom: 15px; }
+        .item-carrito { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f3f4f6; }
+        .item-detalles h4 { font-size: 13px; font-weight: 700; }
+        .item-detalles p { font-size: 12px; color: #db2777; font-weight: 600; }
         
-        /* Botones de Control + / - / Eliminar */
-        .controles-cant { display: flex; align-items: center; gap: 8px; }
-        .btn-cant { width: 28px; height: 28px; border-radius: 50%; border: 1px solid #fbcfe8; background: #fff1f2; color: #db2777; font-weight: bold; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .btn-cant:hover { background: #fce7f3; }
-        .cant-numero { font-size: 13px; font-weight: 700; min-width: 15px; text-align: center; }
-        .btn-eliminar { background: none; border: none; color: #ef4444; font-size: 16px; cursor: pointer; padding: 5px; margin-left: 5px; display: flex; align-items: center; }
-        
-        .btn-whatsapp-enviar { width: 100%; background: #22c55e; color: white; border: none; padding: 14px; border-radius: 14px; font-size: 14px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2); margin-top: 10px; }
-        .btn-whatsapp-enviar:hover { background: #16a34a; }
+        .item-controles { display: flex; align-items: center; gap: 8px; }
+        .btn-control { background: #fce7f3; color: #db2777; border: none; width: 28px; height: 28px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; }
+        .btn-eliminar { background: #fee2e2; color: #ef4444; border: none; padding: 6px 10px; border-radius: 8px; cursor: pointer; font-size: 11px; font-weight: 700; }
     </style>
 </head>
 <body>
 
-    <!-- Encabezado con buscador -->
     <header>
         <h1>Diva Makeup Cali</h1>
         <p>Catálogo Virtual Interactivo</p>
@@ -86,104 +68,90 @@
         </div>
     </header>
 
-    <!-- Vitrina de Productos -->
     <main id="lista-productos">
-        
         <!-- Producto 1 -->
         <div class="tarjeta" data-nombre="labial matte larga duracion">
-            <div class="imagen-cuadro">
-                <img src="https://picsum.photos/id/292/400/400" alt="Labial">
-            </div>
+            <div class="imagen-cuadro"><img src="https://picsum.photos/id/292/400/400" alt="Labial"></div>
             <div class="info">
                 <h3 class="titulo-prod">Labial Matte Larga Duración</h3>
                 <p class="desc-prod">Tono rojo intenso, no transfiere e hidrata tus labios durante todo el día.</p>
                 <div>
                     <div class="precio">$15.000</div>
-                    <button class="btn-agregar" onclick="agregar(1, 'Labial Matte Larga Duración', 15000)">Añadir</button>
+                    <button class="btn-agregar" onclick="agregar(1, 'Labial Matte', 15000)">Añadir</button>
                 </div>
             </div>
         </div>
 
         <!-- Producto 2 -->
         <div class="tarjeta" data-nombre="base de maquillaje alta cobertura">
-            <div class="imagen-cuadro">
-                <img src="https://picsum.photos/id/1025/400/400" alt="Base">
-            </div>
+            <div class="imagen-cuadro"><img src="https://picsum.photos/id/1025/400/400" alt="Base"></div>
             <div class="info">
                 <h3 class="titulo-prod">Base de Maquillaje Alta Cobertura</h3>
                 <p class="desc-prod">Efecto porcelana, excelente control de brillo y acabado mate sedoso.</p>
                 <div>
                     <div class="precio">$32.000</div>
-                    <button class="btn-agregar" onclick="agregar(2, 'Base de Maquillaje Alta Cobertura', 32000)">Añadir</button>
+                    <button class="btn-agregar" onclick="agregar(2, 'Base Cobertura', 32000)">Añadir</button>
                 </div>
             </div>
         </div>
 
         <!-- Producto 3 -->
         <div class="tarjeta" data-nombre="kit de brochas profesionales x12">
-            <div class="imagen-cuadro">
-                <img src="https://picsum.photos/id/64/400/400" alt="Brochas">
-            </div>
+            <div class="imagen-cuadro"><img src="https://picsum.photos/id/64/400/400" alt="Brochas"></div>
             <div class="info">
                 <h3 class="titulo-prod">Kit de Brochas Profesionales x12</h3>
                 <p class="desc-prod">Pelo sintético ultra suave premium para difuminar perfectamente polvos y cremas.</p>
                 <div>
                     <div class="precio">$45.000</div>
-                    <button class="btn-agregar" onclick="agregar(3, 'Kit de Brochas Profesionales x12', 45000)">Añadir</button>
+                    <button class="btn-agregar" onclick="agregar(3, 'Kit Brochas x12', 45000)">Añadir</button>
                 </div>
             </div>
         </div>
 
         <!-- Producto 4 -->
         <div class="tarjeta" data-nombre="paleta de sombras shimmer">
-            <div class="imagen-cuadro">
-                <img src="https://picsum.photos/id/30/400/400" alt="Sombras">
-            </div>
+            <div class="imagen-cuadro"><img src="https://picsum.photos/id/30/400/400" alt="Sombras"></div>
             <div class="info">
                 <h3 class="titulo-prod">Paleta de Sombras Shimmer</h3>
-                <p class="desc-prod">Tonos ultra pigmentados de alta fijación entre acabados mates y satinados de tendencia.</p>
+                <p class="desc-prod">Tonos ultra pigmentados de alta fijación entre acabados mates y satinados.</p>
                 <div>
                     <div class="precio">$28.000</div>
-                    <button class="btn-agregar" onclick="agregar(4, 'Paleta de Sombras Shimmer', 28000)">Añadir</button>
+                    <button class="btn-agregar" onclick="agregar(4, 'Paleta Sombras', 28000)">Añadir</button>
                 </div>
             </div>
         </div>
-
     </main>
 
-    <!-- Barra del Carrito Flotante Inteligente -->
+    <!-- Barra Flotante -->
     <div id="barra-carrito" class="carrito-barra">
         <div class="carrito-datos">
             <div id="cant-items" class="items-conteo">0 artículos</div>
             <div id="total-precio" class="precio-total">Total: $0</div>
         </div>
-        <div>
+        <div class="botones-barra">
             <button class="btn-ver-carrito" onclick="abrirModal()">Ver Pedido</button>
+            <button class="btn-whatsapp" onclick="enviarWhatsApp()">Pedir</button>
         </div>
     </div>
 
-    <!-- Ventana Flotante (Modal) del Detalle del Carrito -->
-    <div id="modal-carrito" class="modal-fondo" onclick="cerrarModalExterno(event)">
+    <!-- Ventana Emergente Detalle del Carrito -->
+    <div id="modal-carrito" class="modal-carrito">
         <div class="modal-contenido">
             <div class="modal-header">
-                <h2>Tu Pedido Solicitado</h2>
+                <h2>Tu Pedido Elegido</h2>
                 <button class="btn-cerrar" onclick="cerrarModal()">&times;</button>
             </div>
-            
-            <!-- Lista Dinámica de Productos Añadidos -->
-            <div id="carrito-lista" class="carrito-lista-items">
-                <!-- Se rellena con JS -->
+            <div id="modal-lista" class="modal-lista">
+                <!-- Se llena con JS -->
             </div>
-            
-            <button class="btn-whatsapp-enviar" onclick="enviarWhatsApp()">
-                Confirmar y enviar por WhatsApp
+            <button class="btn-whatsapp" style="width: 100%; padding: 14px 0;" onclick="enviarWhatsApp()">
+                Confirmar y enviar a WhatsApp
             </button>
         </div>
     </div>
 
     <script>
-        // Configuración Inicial Básica (Pon tu número sin el +)
-        const numeroWhatsApp = "573206358608"; 
+        const numeroWhatsApp = "573206358608";
         let carrito = [];
 
         function agregar(id, nombre, precio) {
@@ -244,31 +212,22 @@
             document.getElementById('modal-carrito').style.display = "none";
         }
 
-        function cerrarModalExterno(event) {
-            if (event.target.id === "modal-carrito") {
-                cerrarModal();
-            }
-        }
-
         function renderizarModal() {
-            const listaContenedor = document.getElementById('carrito-lista');
-            listaContenedor.innerHTML = "";
+            const lista = document.getElementById('modal-lista');
+            lista.innerHTML = "";
             
             carrito.forEach(item => {
                 let subtotal = item.precio * item.cantidad;
-                listaContenedor.innerHTML += `
+                lista.innerHTML += `
                     <div class="item-carrito">
                         <div class="item-detalles">
-                            <div class="item-nombre">${item.nombre}</div>
-                            <div class="item-precio-sub">$${subtotal.toLocaleString('es-CO')}</div>
+                            <h4>${item.name || item.nombre}</h4>
+                            <p>$${subtotal.toLocaleString('es-CO')} (${item.cantidad} und)</p>
                         </div>
-                        <div class="controles-cant">
-                            <button class="btn-cant" onclick="cambiarCantidad(${item.id}, -1)">-</button>
-                            <div class="cant-numero">${item.cantidad}</div>
-                            <button class="btn-cant" onclick="cambiarCantidad(${item.id}, 1)">+</button>
-                            <button class="btn-eliminar" onclick="eliminarItem(${item.id})" title="Eliminar artículo">
-                                &#128465;
-                            </button>
+                        <div class="item-controles">
+                            <button class="btn-control" onclick="cambiarCantidad(${item.id}, -1)">-</button>
+                            <button class="btn-control" onclick="cambiarCantidad(${item.id}, 1)">+</button>
+                            <button class="btn-eliminar" onclick="eliminarItem(${item.id})">🗑️</button>
                         </div>
                     </div>
                 `;
@@ -276,6 +235,7 @@
         }
 
         function enviarWhatsApp() {
+            if (carrito.length === 0) return;
             let texto = "¡Hola Diva Makeup! 💄 Quiero hacer el siguiente pedido:
 
 ";
